@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Наш автопарк - АВТОПРОКАТ 777{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="display-5 fw-bold mb-3">Наш автопарк</h1>
+                <p class="lead">Выберите идеальный автомобиль для вашего путешествия по Абхазии</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Fleet Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            {% for car in cars %}
+            <div class="col-lg-6 mb-5">
+                <div class="car-detail-card card border-0 shadow-lg h-100">
+                    <div class="card-img-wrapper position-relative overflow-hidden">
+                        <img src="{{ car.image_url }}" class="card-img-top object-cover" 
+                             alt="{{ car.name }}" style="height: 250px;">
+                        <div class="price-overlay position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-primary fs-6 py-2 px-3">{{ car.price_per_day }}₽/сутки</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold mb-3">{{ car.name }}</h4>
+                        <p class="card-text text-muted mb-3">{{ car.description }}</p>
+                        
+                        <div class="car-specifications mb-4">
+                            <h6 class="fw-bold mb-3">Характеристики:</h6>
+                            <div class="row">
+                                <div class="col-6 mb-2">
+                                    <i class="fas fa-cog text-primary me-2"></i>
+                                    <small class="fw-medium">Двигатель: {{ car.engine }}</small>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <i class="fas fa-users text-primary me-2"></i>
+                                    <small class="fw-medium">Мест: {{ car.seats }}</small>
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <i class="fas fa-tag text-primary me-2"></i>
+                                    <small class="fw-medium">Тип: {{ car.car_type }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
+                                <i class="fas fa-calendar-check me-2"></i>Забронировать
+                            </a>
+                            <div class="btn-group" role="group">
+                                <a href="https://wa.me/79409938497?text=Хочу%20забронировать%20{{ car.name }}" 
+                                   class="btn btn-outline-success" target="_blank">
+                                    <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                                </a>
+                                <a href="https://t.me/+79409938497" 
+                                   class="btn btn-outline-primary" target="_blank">
+                                    <i class="fab fa-telegram me-1"></i>Telegram
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Additional Services -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-12 mb-5">
+                <h2 class="fw-bold mb-3">Дополнительные услуги</h2>
+                <p class="lead text-muted">Делаем ваше путешествие еще более комфортным</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="additional-services card border-0 shadow">
+                    <div class="card-body text-center py-5">
+                        <i class="fas fa-shipping-fast fa-3x text-primary mb-4"></i>
+                        <h4 class="fw-bold mb-3">Доставка автомобиля</h4>
+                        <p class="text-muted mb-4">
+                            Мы доставим выбранный автомобиль от пункта пропуска ПСОУ до Сухума. 
+                            Встретим вас в удобном месте и проведем подробный инструктаж.
+                        </p>
+                        <div class="delivery-info">
+                            <div class="row text-center">
+                                <div class="col-md-6">
+                                    <div class="delivery-point p-3">
+                                        <i class="fas fa-map-marker-alt text-primary mb-2"></i>
+                                        <h6 class="fw-bold">От ПСОУ</h6>
+                                        <small class="text-muted">Встречаем на границе</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="delivery-point p-3">
+                                        <i class="fas fa-map-marker-alt text-success mb-2"></i>
+                                        <h6 class="fw-bold">До Сухума</h6>
+                                        <small class="text-muted">Доставляем в центр города</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Contact -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h3 class="fw-bold mb-4">Нужна консультация?</h3>
+        <p class="lead mb-4">Наши специалисты помогут выбрать идеальный автомобиль для вашей поездки</p>
+        <a href="tel:+79409938497" class="btn btn-light btn-lg">
+            <i class="fas fa-phone me-2"></i>+7(940)993-84-97
+        </a>
+    </div>
+</section>
+{% endblock %}

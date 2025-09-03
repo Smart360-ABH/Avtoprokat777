@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block title %}Условия аренды - АВТОПРОКАТ 777{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="display-5 fw-bold mb-3">Условия аренды</h1>
+                <p class="lead">Прозрачные и честные условия сотрудничества</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Terms Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                
+                <!-- Requirements Section -->
+                <div class="terms-section mb-5">
+                    <div class="card border-0 shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="card-title mb-0">
+                                <i class="fas fa-user-check me-2"></i>Требования к водителю
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-id-card text-primary me-3"></i>
+                                    <div>
+                                        <strong>Возраст:</strong> от 21 года
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-calendar-alt text-primary me-3"></i>
+                                    <div>
+                                        <strong>Водительский стаж:</strong> не менее 2 лет
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-passport text-primary me-3"></i>
+                                    <div>
+                                        <strong>Документы:</strong> паспорт РФ и водительское удостоверение
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-phone text-primary me-3"></i>
+                                    <div>
+                                        <strong>Связь:</strong> действующий номер телефона
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Terms -->
+                <div class="terms-section mb-5">
+                    <div class="card border-0 shadow">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="card-title mb-0">
+                                <i class="fas fa-credit-card me-2"></i>Условия оплаты
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="payment-method p-3 border rounded">
+                                        <h5 class="fw-bold text-success mb-2">
+                                            <i class="fas fa-money-bill-wave me-2"></i>Наличные
+                                        </h5>
+                                        <p class="mb-0 text-muted">Оплата при получении автомобиля</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="payment-method p-3 border rounded">
+                                        <h5 class="fw-bold text-primary mb-2">
+                                            <i class="fas fa-university me-2"></i>Безналичный расчет
+                                        </h5>
+                                        <p class="mb-0 text-muted">Перевод на карту или счет</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-details mt-4">
+                                <h6 class="fw-bold mb-3">Условия оплаты:</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Предоплата 50% при бронировании</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Остальная сумма при получении автомобиля</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Залог возвращается после возврата авто</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Возможна почасовая аренда (минимум 4 часа)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contract Terms -->
+                <div class="terms-section mb-5">
+                    <div class="card border-0 shadow">
+                        <div class="card-header bg-info text-white">
+                            <h3 class="card-title mb-0">
+                                <i class="fas fa-file-contract me-2"></i>Оформление договора
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="contract-steps">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="step-card text-center p-3">
+                                            <div class="step-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                <span class="fw-bold">1</span>
+                                            </div>
+                                            <h6 class="fw-bold">Бронирование</h6>
+                                            <p class="text-muted mb-0">Заявка через сайт или по телефону</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="step-card text-center p-3">
+                                            <div class="step-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                <span class="fw-bold">2</span>
+                                            </div>
+                                            <h6 class="fw-bold">Подготовка документов</h6>
+                                            <p class="text-muted mb-0">Подготавливаем договор аренды</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="step-card text-center p-3">
+                                            <div class="step-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                <span class="fw-bold">3</span>
+                                            </div>
+                                            <h6 class="fw-bold">Осмотр автомобиля</h6>
+                                            <p class="text-muted mb-0">Совместный осмотр и подписание акта</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="step-card text-center p-3">
+                                            <div class="step-number bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                <span class="fw-bold">4</span>
+                                            </div>
+                                            <h6 class="fw-bold">Получение ключей</h6>
+                                            <p class="text-muted mb-0">Передача автомобиля и инструктаж</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Terms -->
+                <div class="terms-section mb-5">
+                    <div class="card border-0 shadow">
+                        <div class="card-header bg-warning text-dark">
+                            <h3 class="card-title mb-0">
+                                <i class="fas fa-exclamation-triangle me-2"></i>Дополнительные условия
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold text-success mb-3">Включено в стоимость:</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>ОСАГО</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Техническая поддержка 24/7</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Полный бак топлива</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Базовая мойка</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold text-danger mb-3">Дополнительно оплачивается:</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Превышение лимита км/день</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Детское кресло (по запросу)</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Дополнительный водитель</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Доставка в отдаленные районы</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deposit Information -->
+                <div class="terms-section mb-5">
+                    <div class="card border-0 shadow border-start border-primary border-4">
+                        <div class="card-body">
+                            <h4 class="fw-bold text-primary mb-3">
+                                <i class="fas fa-shield-alt me-2"></i>Размер залога
+                            </h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th>Категория автомобиля</th>
+                                            <th>Размер залога</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Эконом класс (Honda Fit RS)</td>
+                                            <td><strong>15 000 ₽</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Средний класс (Toyota Mark X)</td>
+                                            <td><strong>20 000 ₽</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Минивэн (Toyota Alphard)</td>
+                                            <td><strong>30 000 ₽</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Премиум (Toyota Soarer)</td>
+                                            <td><strong>40 000 ₽</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="text-muted mt-3">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Залог возвращается в полном объеме при возврате автомобиля без повреждений и в срок.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact CTA -->
+                <div class="text-center">
+                    <div class="card bg-primary text-white border-0 shadow">
+                        <div class="card-body py-4">
+                            <h4 class="fw-bold mb-3">Остались вопросы?</h4>
+                            <p class="mb-4">Наши специалисты ответят на все ваши вопросы и помогут с бронированием</p>
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                <a href="tel:+79409938497" class="btn btn-light">
+                                    <i class="fas fa-phone me-2"></i>Позвонить
+                                </a>
+                                <a href="https://wa.me/79409938497" class="btn btn-outline-light" target="_blank">
+                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                                </a>
+                                <a href="{{ url_for('contact') }}" class="btn btn-outline-light">
+                                    <i class="fas fa-envelope me-2"></i>Написать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
