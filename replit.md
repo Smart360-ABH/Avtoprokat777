@@ -1,73 +1,73 @@
-# АВТОПРОКАТ 777 - Car Rental Service
+# Автопрокат 777
 
-## Overview
+Сайт премиального автопроката в Абхазии с каталогом автомобилей, фильтрацией, формой заявки, блоком филиалов, отзывами и FAQ.
 
-АВТОПРОКАТ 777 is a car rental service web application built for Abkhazia, offering a fleet of vehicles ranging from compact cars to premium sedans and convertibles. The application provides a complete booking system with customer contact forms, fleet management, and rental request processing. The interface is designed in Russian language to serve the local market.
+## Run & Operate
 
-## User Preferences
+- `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
+- `pnpm --filter @workspace/autopro777 run dev` — run the frontend (port 19846)
+- `pnpm run typecheck` — full typecheck across all packages
+- `pnpm run build` — typecheck + build all packages
+- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
+- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
+- Required env: `DATABASE_URL` — Postgres connection string
 
-Preferred communication style: Simple, everyday language.
+## Stack
 
-## System Architecture
+- pnpm workspaces, Node.js 24, TypeScript 5.9
+- Frontend: React + Vite, Tailwind CSS, wouter, React Query
+- API: Express 5
+- DB: PostgreSQL + Drizzle ORM
+- Validation: Zod (`zod/v4`), `drizzle-zod`
+- API codegen: Orval (from OpenAPI spec)
+- Build: esbuild (CJS bundle)
 
-### Frontend Architecture
-- **Template Engine**: Jinja2 templates with Flask for server-side rendering
-- **UI Framework**: Bootstrap 5 for responsive design and component styling
-- **Icons**: Font Awesome for consistent iconography
-- **JavaScript**: Vanilla JavaScript for client-side interactions including phone number formatting, smooth scrolling, and form enhancements
-- **Styling**: Custom CSS with CSS variables for consistent theming and responsive design
+## Where things live
 
-### Backend Architecture
-- **Web Framework**: Flask with Python for the main application logic
-- **Database ORM**: SQLAlchemy with Flask-SQLAlchemy for database operations
-- **Form Handling**: Flask-WTF with WTForms for form validation and CSRF protection
-- **Session Management**: Flask sessions with configurable secret key
-- **Database**: SQLite for development with PostgreSQL support via environment configuration
-- **Middleware**: ProxyFix for handling reverse proxy headers
+- `lib/api-spec/openapi.yaml` — OpenAPI contract (source of truth)
+- `lib/db/src/schema/` — DB schema: cars, bookings, reviews, branches
+- `artifacts/api-server/src/routes/` — Express route handlers
+- `artifacts/autopro777/src/` — Frontend React app
+- `artifacts/autopro777/src/components/` — All page sections/components
+- `artifacts/autopro777/src/assets/` — Car images (AI-generated)
 
-### Data Models
-- **Car Model**: Stores vehicle information including name, model, pricing, specifications, and availability status
-- **BookingRequest Model**: Manages rental requests with customer details, dates, and booking status
-- **ContactMessage Model**: Handles general customer inquiries and contact form submissions
+## Architecture decisions
 
-### Form Architecture
-- **BookingForm**: Comprehensive rental booking with date validation and car selection
-- **ContactForm**: Customer contact form with validation for inquiries
-- **Validation**: Custom date validation ensuring future booking dates and logical date ranges
+- Contract-first OpenAPI spec drives both frontend hooks (Orval → React Query) and backend Zod validation
+- Frontend is a single-page app with smooth scroll sections (no routing needed)
+- Car images are stored as local assets (AI-generated); imageUrl in DB can override per-car
+- Booking form submits via the API; no third-party form service needed
+- Yandex Maps embedded via iframe (no API key required for basic embed)
 
-### Database Design
-- **Relational Structure**: Foreign key relationships between cars and bookings
-- **Automatic Timestamps**: Created_at fields for audit trails
-- **Status Tracking**: Booking status management (pending, confirmed, etc.)
-- **Flexible Schema**: Support for car specifications, customer details, and messaging
+## Product
 
-### Application Structure
-- **Modular Design**: Separated concerns with dedicated files for models, routes, forms, and configuration
-- **Database Initialization**: Automatic table creation and sample data seeding
-- **Environment Configuration**: Support for development and production database URLs
-- **Logging**: Comprehensive logging configuration for debugging and monitoring
+- **Hero** — full-screen Caucasus coastline image, tagline, CTA and phone button
+- **Advantages** — 6 advantage cards with icons
+- **Popular Cars** — filtered subset (popular=true) from DB
+- **Car Catalog** — full catalog with category filter tabs; each card opens a detail modal and booking modal
+- **Branches** — 3 cards (Новый Афон, Гагра, Гудаута) with map links + Yandex Maps iframe
+- **Rental Terms** — icon + text conditions block on dark background
+- **Reviews** — paginated slider with star ratings, loaded from DB
+- **Booking Form** — full form (name, phone, car, dates, city, comment, driver toggle) → POST /api/bookings
+- **FAQ** — accordion with 8 common questions
+- **Footer** — contact info, WhatsApp/Telegram buttons, branch list, navigation
 
-## External Dependencies
+## User preferences
 
-### Core Dependencies
-- **Flask**: Web application framework
-- **SQLAlchemy**: Database ORM and connection management
-- **Flask-WTF**: Form handling and CSRF protection
-- **WTForms**: Form validation and rendering
-- **Werkzeug**: WSGI utilities and proxy handling
+- Language: Russian
+- Brand: Автопрокат 777
+- Phone: +7 (940) 993-84-97
+- Branches: Новый Афон (ул. Харазия), Гагра (ул. Адыгаа), Гудаута (ул. Маргания, 3)
 
-### Frontend Dependencies
-- **Bootstrap 5**: CSS framework loaded via CDN
-- **Font Awesome**: Icon library loaded via CDN
-- **jQuery**: JavaScript library for enhanced functionality
+## Gotchas
 
-### Database
-- **SQLite**: Default development database
-- **PostgreSQL**: Production database support via DATABASE_URL environment variable
-- **Connection Pooling**: Configured with pool recycling and pre-ping for reliability
+- Always run `pnpm --filter @workspace/api-spec run codegen` after changing `openapi.yaml`
+- Car images resolve by name matching in `CarCard.tsx` — add new entries to `carImages` map when adding new cars
+- WhatsApp/Telegram links in `Footer.tsx` use placeholder usernames — update before going live
+- Legal info in footer (ИП name, ИНН) needs to be filled in before publishing
 
-### Potential Integrations
-- **Payment Processing**: Ready for integration with payment gateways
-- **SMS/Email Services**: Contact forms prepared for notification services
-- **Map Services**: Infrastructure for location-based features
-- **Image Storage**: Support for car image hosting services
+## Pointers
+
+- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- Car data lives in `cars` table — edit via SQL or add an admin UI
+- Reviews are in `reviews` table — edit via SQL

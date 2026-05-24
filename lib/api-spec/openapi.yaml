@@ -1,0 +1,271 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification for Автопрокат 777
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: cars
+    description: Car fleet operations
+  - name: bookings
+    description: Booking operations
+  - name: reviews
+    description: Reviews operations
+  - name: branches
+    description: Branch locations operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /cars:
+    get:
+      operationId: listCars
+      tags: [cars]
+      summary: List all cars
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of cars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+
+  /cars/popular:
+    get:
+      operationId: listPopularCars
+      tags: [cars]
+      summary: List popular cars
+      responses:
+        "200":
+          description: List of popular cars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+
+  /cars/{id}:
+    get:
+      operationId: getCar
+      tags: [cars]
+      summary: Get car by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+        "404":
+          description: Car not found
+
+  /bookings:
+    post:
+      operationId: createBooking
+      tags: [bookings]
+      summary: Submit a booking request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingInput"
+      responses:
+        "201":
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "400":
+          description: Validation error
+
+  /reviews:
+    get:
+      operationId: listReviews
+      tags: [reviews]
+      summary: List all reviews
+      responses:
+        "200":
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
+
+  /branches:
+    get:
+      operationId: listBranches
+      tags: [branches]
+      summary: List all branches
+      responses:
+        "200":
+          description: List of branches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Branch"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    Car:
+      type: object
+      required: [id, name, category, pricePerDay, available]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        category:
+          type: string
+          description: "sedan, crossover, minivan, convertible, economy"
+        pricePerDay:
+          type: integer
+          description: Price in rubles per day
+        description:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        seats:
+          type: ["integer", "null"]
+        transmission:
+          type: ["string", "null"]
+        year:
+          type: ["integer", "null"]
+        popular:
+          type: boolean
+        available:
+          type: boolean
+
+    BookingInput:
+      type: object
+      required: [name, phone, carId, startDate, city]
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        carId:
+          type: ["integer", "null"]
+        carName:
+          type: ["string", "null"]
+        startDate:
+          type: string
+        endDate:
+          type: ["string", "null"]
+        city:
+          type: string
+        comment:
+          type: ["string", "null"]
+        withDriver:
+          type: boolean
+
+    Booking:
+      type: object
+      required: [id, name, phone, startDate, city, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        carId:
+          type: ["integer", "null"]
+        carName:
+          type: ["string", "null"]
+        startDate:
+          type: string
+        endDate:
+          type: ["string", "null"]
+        city:
+          type: string
+        comment:
+          type: ["string", "null"]
+        withDriver:
+          type: boolean
+        createdAt:
+          type: string
+
+    Review:
+      type: object
+      required: [id, author, text, rating]
+      properties:
+        id:
+          type: integer
+        author:
+          type: string
+        text:
+          type: string
+        rating:
+          type: integer
+        date:
+          type: ["string", "null"]
+        avatarUrl:
+          type: ["string", "null"]
+
+    Branch:
+      type: object
+      required: [id, name, address, phone]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+        city:
+          type: string
+        workingHours:
+          type: ["string", "null"]
+        mapUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
