@@ -37,7 +37,9 @@ const publicPath = path.resolve(import.meta.dirname, "../../autopro777/dist/publ
 app.use(express.static(publicPath));
 
 // Handle client-side routing (SPA)
-app.get("*", (req, res) => {
+// Use a regular-expression route to avoid path parsing issues with '*' on
+// certain path-to-regexp/router versions.
+app.get(/.*/, (req, res) => {
   res.sendFile(path.resolve(publicPath, "index.html"));
 });
 

@@ -29,7 +29,7 @@ export default function ReviewsSection() {
   const prev = () => setCurrentIndex((i) => Math.max(0, i - 1));
   const next = () => setCurrentIndex((i) => Math.min(maxStart, i + 1));
 
-  const shown = reviews?.slice(currentIndex, currentIndex + visible) ?? [];
+  const shown = Array.isArray(reviews) ? reviews.slice(currentIndex, currentIndex + visible) : [];
 
   return (
     <section id="reviews" className="py-20 lg:py-28 bg-white">
@@ -73,7 +73,7 @@ export default function ReviewsSection() {
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1,2,3].map(i => <div key={i} className="bg-gray-50 rounded-2xl p-6 h-48 animate-pulse" />)}
+            {[1, 2, 3].map(i => <div key={i} className="bg-gray-50 rounded-2xl p-6 h-48 animate-pulse" />)}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -108,9 +108,8 @@ export default function ReviewsSection() {
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
-                className={`rounded-full transition-all duration-200 ${
-                  i === currentIndex ? "w-6 h-2 bg-primary" : "w-2 h-2 bg-gray-200"
-                }`}
+                className={`rounded-full transition-all duration-200 ${i === currentIndex ? "w-6 h-2 bg-primary" : "w-2 h-2 bg-gray-200"
+                  }`}
               />
             ))}
           </div>

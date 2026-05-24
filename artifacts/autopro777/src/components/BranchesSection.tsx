@@ -21,13 +21,13 @@ export default function BranchesSection() {
         {/* Branch cards */}
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {[1,2,3].map(i => (
+            {[1, 2, 3].map(i => (
               <div key={i} className="bg-gray-50 rounded-2xl p-6 animate-pulse h-56" />
             ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {branches?.map((branch) => (
+            {Array.isArray(branches) && branches.map((branch) => (
               <div key={branch.id} className="group bg-white rounded-2xl border border-border p-6 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary/20 transition-colors">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

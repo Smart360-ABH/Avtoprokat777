@@ -88,7 +88,7 @@ export default function CarsSection() {
               <div key={i} className="animate-pulse" style={{ background: "#0d1018", height: "380px" }} />
             ))}
           </div>
-        ) : cars && cars.length > 0 ? (
+        ) : Array.isArray(cars) && cars.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px"
             style={{ background: "rgba(184,137,42,0.08)" }}>
             {cars.map((car) => (
