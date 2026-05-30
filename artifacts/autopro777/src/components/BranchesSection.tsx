@@ -1,7 +1,23 @@
 import { useListBranches } from "@workspace/api-client-react";
 
+function buildYandexMapUrl(
+  branches: Array<{ lat?: number | null; lng?: number | null }>,
+): string {
+  const points = branches.filter((b) => b.lat != null && b.lng != null);
+  if (points.length === 0) {
+    return "https://yandex.ru/map-widget/v1/?ll=40.565&z=10";
+  }
+
+  const avgLng = points.reduce((sum, b) => sum + b.lng!, 0) / points.length;
+  const avgLat = points.reduce((sum, b) => sum + b.lat!, 0) / points.length;
+  const pt = points.map((b) => `${b.lng},${b.lat},pm2rdl`).join("~");
+
+  return `https://yandex.ru/map-widget/v1/?ll=${avgLng},${avgLat}&z=10&pt=${pt}`;
+}
+
 export default function BranchesSection() {
   const { data: branches, isLoading } = useListBranches();
+  const mapSrc = Array.isArray(branches) ? buildYandexMapUrl(branches) : null;
 
   return (
     <section id="branches" className="py-20 lg:py-28 bg-white">
@@ -82,17 +98,19 @@ export default function BranchesSection() {
         )}
 
         {/* Yandex Maps iframe */}
-        <div className="rounded-2xl overflow-hidden border border-border shadow-lg">
-          <iframe
-            src="https://yandex.ru/map-widget/v1/?ll=40.565&z=10&pt=40.8017,43.0892,pm2rdl~40.2667,43.3228,pm2rdl~40.6283,43.1017,pm2rdl"
-            width="100%"
-            height="400"
-            className="block"
-            style={{ border: 0 }}
-            title="Филиалы Автопрокат 777"
-            allowFullScreen
-          />
-        </div>
+        {mapSrc && (
+          <div className="rounded-2xl overflow-hidden border border-border shadow-lg">
+            <iframe
+              src={mapSrc}
+              width="100%"
+              height="400"
+              className="block"
+              style={{ border: 0 }}
+              title="Филиалы Автопрокат 777"
+              allowFullScreen
+            />
+          </div>
+        )}
       </div>
     </section>
   );
