@@ -3,6 +3,7 @@ const gallery = (carId: number, ...files: string[]) =>
 
 /** Галереи фото по id автомобиля */
 export const CAR_GALLERIES: Record<number, string[]> = {
+  1: gallery(1, "01.jpeg"),
   2: gallery(2, "01.jpeg", "02.jpeg", "03.jpeg"),
   3: gallery(
     3,
@@ -17,5 +18,7 @@ export const CAR_GALLERIES: Record<number, string[]> = {
   ),
   4: gallery(4, "01.jpeg", "02.jpeg", "03.jpeg", "04.jpeg"),
   5: gallery(5, "01.jpeg", "02.jpeg", "03.jpeg"),
+  6: gallery(6, "01.jpeg"),
   7: gallery(7, "01.jpeg", "02.jpeg", "03.jpeg", "04.jpeg"),
+  8: gallery(8, "01.jpeg"),
 };

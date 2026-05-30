@@ -14,8 +14,8 @@ const BASE_CARS = [
     pricePerDay: 3000,
     description:
       "Этот седан сочетает комфорт, статус и надёжность — отличный выбор для поездок по Абхазии.",
-    imageUrl: CAR_PHOTO_URL_OVERRIDES[1] ?? local("toyota-mark-x.png"),
-    steeringWheel: "правый",
+    imageUrl: CAR_PHOTO_URL_OVERRIDES[1] ?? local("toyota-mark-x.jpeg"),
+    steeringWheel: "левый",
     seats: 5,
     transmission: "автомат",
     year: 2012,
@@ -89,7 +89,7 @@ const BASE_CARS = [
     pricePerDay: 5000,
     description:
       "Ощутите свободу открытого неба — элегантный кабриолет для незабываемых поездок.",
-    imageUrl: CAR_PHOTO_URL_OVERRIDES[6] ?? local("mercedes-slk320.png"),
+    imageUrl: CAR_PHOTO_URL_OVERRIDES[6] ?? local("mercedes-slk320.jpeg"),
     steeringWheel: "левый",
     seats: 2,
     transmission: "автомат",
@@ -119,7 +119,7 @@ const BASE_CARS = [
     pricePerDay: 6000,
     description:
       "Премиальный спортивный купе — для тех, кто ценит скорость, стиль и эстетику.",
-    imageUrl: CAR_PHOTO_URL_OVERRIDES[8] ?? local("toyota-soarer.png"),
+    imageUrl: CAR_PHOTO_URL_OVERRIDES[8] ?? local("toyota-soarer.jpeg"),
     steeringWheel: "правый",
     seats: 4,
     transmission: "автомат",
