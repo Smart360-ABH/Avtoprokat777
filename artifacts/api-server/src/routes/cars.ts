@@ -2,15 +2,9 @@ import { Router } from "express";
 import { db, carsTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { ListCarsQueryParams, ListCarsResponse, ListPopularCarsResponse, GetCarParams, GetCarResponse } from "@workspace/api-zod";
+import { MOCK_CARS } from "../data/mock-cars";
 
 const router = Router();
-
-const MOCK_CARS = [
-  { id: 1, name: "Mercedes-Benz S-Class", category: "sedan", pricePerDay: 15000, description: "Премиальный седан для максимального комфорта", seats: 5, transmission: "автомат", year: 2023, popular: true, available: true },
-  { id: 2, name: "BMW X5", category: "crossover", pricePerDay: 12000, description: "Мощный кроссовер для любых дорог", seats: 5, transmission: "автомат", year: 2022, popular: true, available: true },
-  { id: 3, name: "Audi A6", category: "sedan", pricePerDay: 9000, description: "Стильный и технологичный седан", seats: 5, transmission: "автомат", year: 2021, popular: false, available: true },
-  { id: 4, name: "Porsche 911", category: "convertible", pricePerDay: 25000, description: "Легендарный спорткар", seats: 2, transmission: "робот", year: 2023, popular: true, available: true },
-];
 
 router.get("/cars", async (req, res): Promise<void> => {
   const parsed = ListCarsQueryParams.safeParse(req.query);

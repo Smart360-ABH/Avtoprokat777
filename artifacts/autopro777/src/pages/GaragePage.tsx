@@ -1,50 +1,25 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "wouter";
 import BookingModal from "@/components/BookingModal";
+import CarModal from "@/components/CarModal";
 import type { Car } from "@/types";
 import { useListCars } from "@workspace/api-client-react";
-
-import toyotaSoarerImg from "@/assets/toyota-soarer.png";
-import mercedesSlkImg from "@/assets/mercedes-slk320.png";
-import toyotaAlphardImg from "@/assets/toyota-alphard.png";
-import toyotaMarkXImg from "@/assets/toyota-mark-x.png";
-import hondaFitImg from "@/assets/honda-fit-rs.png";
-
-const carImages: Record<string, string> = {
-  "toyota soarer": toyotaSoarerImg,
-  "mercedes": mercedesSlkImg,
-  "alphard": toyotaAlphardImg,
-  "mark x": toyotaMarkXImg,
-  "honda fit": hondaFitImg,
-};
-
-function getCarImg(car: Car): string {
-  const n = car.name.toLowerCase();
-  for (const [k, v] of Object.entries(carImages)) {
-    if (n.includes(k)) return v;
-  }
-  return toyotaSoarerImg;
-}
+import { resolveCarImage } from "@/lib/car-image";
 
 const CATEGORIES = [
   { value: "", label: "Все" },
-  { value: "economy", label: "Эконом" },
-  { value: "sedan", label: "Бизнес" },
-  { value: "crossover", label: "Кроссовер" },
+  { value: "sedan", label: "Седан" },
+  { value: "hatchback", label: "Хэтчбек" },
   { value: "convertible", label: "Кабриолет" },
   { value: "minivan", label: "Минивэн" },
-  { value: "sport", label: "Спорт" },
 ];
 
 const categoryColors: Record<string, string> = {
   "": "#f59e0b",
-  economy: "#22c55e",
   sedan: "#3b82f6",
-  crossover: "#8b5cf6",
+  hatchback: "#22c55e",
   convertible: "#ec4899",
   minivan: "#f97316",
-  sport: "#ef4444",
 };
 
 const slideVariants = {
@@ -186,6 +161,7 @@ export default function GaragePage() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [bookCar, setBookCar] = useState<Car | null>(null);
+  const [viewCar, setViewCar] = useState<Car | null>(null);
   const touchStart = useRef<number | null>(null);
 
   const { data: allCars = [], isLoading } = useListCars(
@@ -341,7 +317,7 @@ export default function GaragePage() {
                         style={{ background: `radial-gradient(ellipse, ${accent}88 0%, transparent 70%)` }}
                       />
                       <img
-                        src={getCarImg(car)}
+                        src={resolveCarImage(car)}
                         alt={car.name}
                         className="relative max-h-full max-w-full object-contain drop-shadow-2xl"
                         style={{
@@ -420,6 +396,11 @@ export default function GaragePage() {
                               <span>{car.transmission}</span>
                             </div>
                           )}
+                          {car.steeringWheel && (
+                            <div className="flex items-center gap-1.5 text-white/60">
+                              <span>{car.steeringWheel} руль</span>
+                            </div>
+                          )}
                           {(car as any).fuelType && (
                             <div className="flex items-center gap-1.5 text-white/60">
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -462,8 +443,9 @@ export default function GaragePage() {
                           >
                             Забронировать
                           </button>
-                          <Link
-                            href="/catalog"
+                          <button
+                            type="button"
+                            onClick={() => setViewCar(car)}
                             className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105"
                             style={{
                               background: "rgba(255,255,255,0.06)",
@@ -472,7 +454,7 @@ export default function GaragePage() {
                             }}
                           >
                             Подробнее
-                          </Link>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -551,6 +533,16 @@ export default function GaragePage() {
       </div>
 
       {/* Booking modal */}
+      {viewCar && (
+        <CarModal
+          car={viewCar}
+          onClose={() => setViewCar(null)}
+          onBook={(c) => {
+            setViewCar(null);
+            setBookCar(c);
+          }}
+        />
+      )}
       {bookCar && (
         <BookingModal car={bookCar} onClose={() => setBookCar(null)} />
       )}

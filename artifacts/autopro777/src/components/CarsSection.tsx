@@ -8,10 +8,9 @@ import type { Car } from "@/types";
 const categories = [
   { value: "", label: "Вся коллекция" },
   { value: "sedan", label: "Седан" },
-  { value: "crossover", label: "Кроссовер" },
-  { value: "minivan", label: "Минивэн" },
+  { value: "hatchback", label: "Хэтчбек" },
   { value: "convertible", label: "Кабриолет" },
-  { value: "economy", label: "Эконом" },
+  { value: "minivan", label: "Минивэн" },
 ];
 
 export default function CarsSection() {

@@ -1,33 +1,11 @@
 import type { Car } from "@/types";
-import toyotaSoarerImg from "@/assets/toyota-soarer.png";
-import mercedesSlkImg from "@/assets/mercedes-slk320.png";
-import toyotaAlphardImg from "@/assets/toyota-alphard.png";
-import toyotaMarkXImg from "@/assets/toyota-mark-x.png";
-import hondaFitImg from "@/assets/honda-fit-rs.png";
-
-const carImages: Record<string, string> = {
-  "toyota soarer": toyotaSoarerImg,
-  "mercedes": mercedesSlkImg,
-  "alphard": toyotaAlphardImg,
-  "mark x": toyotaMarkXImg,
-  "honda fit": hondaFitImg,
-};
-
-function getCarImage(car: Car): string {
-  const key = car.name.toLowerCase();
-  for (const [k, v] of Object.entries(carImages)) {
-    if (key.includes(k)) return v;
-  }
-  return toyotaSoarerImg;
-}
+import { resolveCarImage } from "@/lib/car-image";
 
 const categoryLabels: Record<string, string> = {
-  sedan: "Представительский седан",
-  crossover: "Элитный кроссовер",
-  minivan: "Премиум минивэн",
-  convertible: "Элегантный кабриолет",
-  economy: "Эконом",
-  sport: "Спортивный",
+  sedan: "Седан",
+  hatchback: "Хэтчбек",
+  minivan: "Минивэн",
+  convertible: "Кабриолет",
 };
 
 interface Props {
@@ -37,7 +15,7 @@ interface Props {
 }
 
 export default function CarCard({ car, onBook, onView }: Props) {
-  const img = car.imageUrl || getCarImage(car);
+  const img = resolveCarImage(car);
 
   return (
     <div
@@ -121,6 +99,11 @@ export default function CarCard({ car, onBook, onView }: Props) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
               </svg>
               {car.transmission}
+            </span>
+          )}
+          {car.steeringWheel && (
+            <span className="text-xs tracking-wide" style={{ color: "rgba(194,194,198,0.5)" }}>
+              {car.steeringWheel} руль
             </span>
           )}
           {car.year && (

@@ -5,6 +5,8 @@ export interface Car {
   pricePerDay: number;
   description?: string | null;
   imageUrl?: string | null;
+  images?: string[];
+  steeringWheel?: string | null;
   seats?: number | null;
   transmission?: string | null;
   year?: number | null;

@@ -20,6 +20,8 @@ export interface Car {
   description?: string | null;
   /** @nullable */
   imageUrl?: string | null;
+  images?: string[];
+  steeringWheel?: string | null;
   /** @nullable */
   seats?: number | null;
   /** @nullable */

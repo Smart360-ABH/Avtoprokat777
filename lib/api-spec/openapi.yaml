@@ -169,6 +169,11 @@ components:
           type: ["string", "null"]
         imageUrl:
           type: ["string", "null"]
+        images:
+          type: array
+          items:
+            type: string
+          description: Gallery photo URLs for the car detail view
         seats:
           type: ["integer", "null"]
         transmission:
